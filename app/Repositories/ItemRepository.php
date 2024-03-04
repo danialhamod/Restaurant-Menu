@@ -1,16 +1,16 @@
 <?php
 namespace App\Repositories;
 
-use App\Interfaces\CategoryRepositoryInterface;
-use App\Models\Category;
+use App\Interfaces\ItemRepositoryInterface;
+use App\Models\Item;
 
-class CategoryRepository implements CategoryRepositoryInterface
+class ItemRepository implements ItemRepositoryInterface
 {
     private $searchFields = ['name'];
 
     public function search($search, $pageSize, $all)
     {
-        $query = Category::query();
+        $query = Item::query();
         
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -25,27 +25,27 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function create(array $attributes)
     {
-        return Category::create($attributes);
+        return Item::create($attributes);
     }
 
     public function findById($id)
     {
-        return Category::find($id);
+        return Item::find($id);
     }
 
     public function update($id, array $attributes)
     {
-        $category = $this->findById($id);
-        if ($category)
-            $category->update($attributes);
-        return $category;
+        $item = $this->findById($id);
+        if ($item)
+            $item->update($attributes);
+        return $item;
     }
 
     public function delete($id)
     {
-        $category = $this->findById($id);
-        if ($category)
-            $category->delete();
-        return $category;
+        $item = $this->findById($id);
+        if ($item)
+            $item->delete();
+        return $item;
     }
 }

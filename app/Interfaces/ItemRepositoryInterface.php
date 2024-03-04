@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface RepositoryInterface
+interface ItemRepositoryInterface
 {
     public function search($search, $pageSize, $all);
     public function create(array $attributes);

@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Http\Responses\ApiCode;
-use App\Interfaces\RepositoryInterface;
+use App\Interfaces\CategoryRepositoryInterface;
 use App\Traits\WrapsApiResponse as WrapsApiResponse;
 
 class CategoryService
@@ -14,7 +14,7 @@ class CategoryService
 
     protected $categoryRepository;
 
-    public function __construct(RepositoryInterface $categoryRepository)
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }

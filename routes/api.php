@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ItemsController;
 
 function addResourceRoutes($base, $controller, $except = [])
 {
@@ -48,3 +49,4 @@ Route::get('/user', function (Request $request) {
 });
 
 addResourceRoutes('categories', CategoriesController::class);
+addResourceRoutes('items', ItemsController::class);
