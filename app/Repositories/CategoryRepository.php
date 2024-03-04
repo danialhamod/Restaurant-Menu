@@ -36,6 +36,7 @@ class CategoryRepository implements RepositoryInterface
     public function update($id, array $attributes)
     {
         $category = $this->findById($id);
+        if (!$category) return null;
         $category->update($attributes);
         return $category;
     }
@@ -43,6 +44,7 @@ class CategoryRepository implements RepositoryInterface
     public function delete($id)
     {
         $category = $this->findById($id);
+        if (!$category) return null;
         $category->delete();
         return $category;
     }

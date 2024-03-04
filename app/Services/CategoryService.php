@@ -38,25 +38,25 @@ class CategoryService
     public function get($id)
     {
         $category = $this->categoryRepository->findById($id);
-        if (!$category) {
-            return $this->respondError('Category doesn\'t exist anymore', ApiCode::NotFound);
-        }
+        if (!$category) $this->notFound();
         return $this->respondSuccess(new CategoryResource($category));
     }
 
     public function update($request, $id)
     {
-        $category = $this->categoryRepository->findById($id);
-        if (!$category) {
-            return $this->respondError('Category doesn\'t exist anymore', ApiCode::NotFound);
-        }
         $category = $this->categoryRepository->update($id, $request->validated());
+        if (!$category) $this->notFound();
         return $this->respondSuccess(new CategoryResource($category->fresh()));
     }
 
     public function delete($id)
     {
-        $this->categoryRepository->delete($id);
-        return ['message' => 'done'];
+        $category = $this->categoryRepository->delete($id);
+        if (!$category) $this->notFound();
+        return $this->respondSuccess();
+    }
+
+    private function notFound() {
+        return $this->respondError('Category doesn\'t exist anymore', ApiCode::NotFound);
     }
 }
