@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Responses\Response;
+use App\Rules\MaxLevelSubCategory;
 use App\Traits\WrapsApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,8 +21,8 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => "string",
-            'parent_id' => 'exists:categories,id'
+            'name' => 'string',
+            'parent_id' => ['exists:categories,id', new MaxLevelSubCategory(config('app.subcategoryMaxLevel'))],
         ];
     }
 

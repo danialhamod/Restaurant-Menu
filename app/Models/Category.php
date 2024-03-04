@@ -18,4 +18,25 @@ class Category extends Model
         'name',
         'parent_id',
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function isUnderMaxLavel($maxLevel)
+    {
+        $count = 0;
+        $currentCategory = $this;
+
+        while ($currentCategory->parent) {
+            $currentCategory = $currentCategory->parent;
+            $count++;
+            if ($count >= $maxLevel) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

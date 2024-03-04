@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'subcategoryMaxLevel' => env('SUB_CAT_MAX_LEVEL', 4),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
