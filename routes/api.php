@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppSettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -50,3 +51,4 @@ Route::get('/user', function (Request $request) {
 
 addResourceRoutes('categories', CategoriesController::class);
 addResourceRoutes('items', ItemsController::class);
+Route::post('globalDiscount/update', [AppSettingsController::class, 'updateGlobalDiscount'])->name('appsettings.update');

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class CategoriesController extends Controller
         return $this->categoryService->list($request);
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CreateCategoryRequest $request)
     {
         return $this->categoryService->add($request);
     }
@@ -30,7 +31,7 @@ class CategoriesController extends Controller
         return $this->categoryService->get($id);
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         return $this->categoryService->update($request, $id);
     }

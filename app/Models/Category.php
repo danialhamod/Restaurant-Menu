@@ -17,6 +17,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'parent_id',
+        'discount'
     ];
 
     public function parent()
@@ -49,4 +50,20 @@ class Category extends Model
 
         return true;
     }
+
+    public function getClosestDiscount()
+    {
+        $count = 0;
+        $currentCategory = $this;
+
+        while ($currentCategory) {
+            if ($currentCategory->discount) {
+                return $currentCategory->discount;
+            }
+            $currentCategory = $currentCategory->parent;
+        }
+
+        return 0;
+    }
+    
 }

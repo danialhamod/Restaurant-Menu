@@ -4,13 +4,13 @@ namespace App\Http\Requests;
 
 use App\Enums\ChildTypes;
 use App\Rules\DontHaveMixedChilds;
-use App\Rules\MaxLevelSubItem;
+use App\Rules\MaxLevelSubCategory;
 use App\Traits\WrapsApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ItemRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     use WrapsApiResponse;
 
@@ -22,12 +22,12 @@ class ItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'category_id' => [
-                'required',
+            'name' => 'string',
+            'discount' => 'numeric|min:0',
+            'parent_id' => [
                 'exists:categories,id',
-                new DontHaveMixedChilds(ChildTypes::SubCategory)
+                new MaxLevelSubCategory(config('app.subcategoryMaxLevel')),
+                new DontHaveMixedChilds(ChildTypes::Item)
             ],
         ];
     }

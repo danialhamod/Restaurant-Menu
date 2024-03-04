@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ItemRequest;
+use App\Http\Requests\CreateItemRequest;
+use App\Http\Requests\UpdateItemRequest;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class ItemsController extends Controller
         return $this->itemService->list($request);
     }
 
-    public function store(ItemRequest $request)
+    public function store(CreateItemRequest $request)
     {
         return $this->itemService->add($request);
     }
@@ -30,7 +31,7 @@ class ItemsController extends Controller
         return $this->itemService->get($id);
     }
 
-    public function update(ItemRequest $request, $id)
+    public function update(UpdateItemRequest $request, $id)
     {
         return $this->itemService->update($request, $id);
     }
