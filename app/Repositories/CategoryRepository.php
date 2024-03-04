@@ -36,16 +36,16 @@ class CategoryRepository implements RepositoryInterface
     public function update($id, array $attributes)
     {
         $category = $this->findById($id);
-        if (!$category) return null;
-        $category->update($attributes);
+        if ($category)
+            $category->update($attributes);
         return $category;
     }
 
     public function delete($id)
     {
         $category = $this->findById($id);
-        if (!$category) return null;
-        $category->delete();
+        if ($category)
+            $category->delete();
         return $category;
     }
 }

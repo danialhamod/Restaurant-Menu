@@ -38,21 +38,21 @@ class CategoryService
     public function get($id)
     {
         $category = $this->categoryRepository->findById($id);
-        if (!$category) $this->notFound();
+        if (!$category) return $this->notFound();
         return $this->respondSuccess(new CategoryResource($category));
     }
 
     public function update($request, $id)
     {
         $category = $this->categoryRepository->update($id, $request->validated());
-        if (!$category) $this->notFound();
+        if (!$category) return $this->notFound();
         return $this->respondSuccess(new CategoryResource($category->fresh()));
     }
 
     public function delete($id)
     {
         $category = $this->categoryRepository->delete($id);
-        if (!$category) $this->notFound();
+        if (!$category) return $this->notFound();
         return $this->respondSuccess();
     }
 
