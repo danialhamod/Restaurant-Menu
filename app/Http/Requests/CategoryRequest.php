@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ChildTypes;
 use App\Http\Responses\Response;
+use App\Rules\DontHaveMixedChilds;
 use App\Rules\MaxLevelSubCategory;
 use App\Traits\WrapsApiResponse;
 use Illuminate\Contracts\Validation\Validator;
@@ -22,7 +24,11 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => 'string',
-            'parent_id' => ['exists:categories,id', new MaxLevelSubCategory(config('app.subcategoryMaxLevel'))],
+            'parent_id' => [
+                'exists:categories,id',
+                new MaxLevelSubCategory(config('app.subcategoryMaxLevel')),
+                new DontHaveMixedChilds(ChildTypes::Item)
+            ],
         ];
     }
 

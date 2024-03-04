@@ -24,6 +24,16 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    public function subcategories()
+    {
+        return $this->HasMany(Category::class, 'parent_id');
+    }
+
+    public function items()
+    {
+        return $this->HasMany(Item::class);
+    }
+
     public function isUnderMaxLavel($maxLevel)
     {
         $count = 0;

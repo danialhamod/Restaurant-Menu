@@ -18,4 +18,9 @@ class Item extends Model
         'name',
         'price',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
