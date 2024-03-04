@@ -3,12 +3,15 @@
 namespace App\Http\Requests;
 
 use App\Http\Responses\Response;
+use App\Traits\WrapsApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CategoryRequest extends FormRequest
 {
+    use WrapsApiResponse;
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,7 +35,7 @@ class CategoryRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        $response = Response::respondValidationError($validator);
+        $response = $this->respondValidationError($validator);
         throw new HttpResponseException($response);
     }
 }

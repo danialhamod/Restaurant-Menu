@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CategoryCollection extends ResourceCollection
+class CategoryCollection extends BaseResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,11 +13,16 @@ class CategoryCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        if ($this->isPaginated()) {
+            return [
+                'data' => $this->collection,
+                'total' => $this->resource->total(),
+                'per_page' => $this->resource->perPage(),
+                'current_page' => $this->resource->currentPage(),
+            ];
+        } 
         return [
-            'data' =>$this->collection,
-            'total' => $this->resource->total(),
-            'per_page' => $this->resource->perPage(),
-            'current_page' => $this->resource->currentPage(),
+            'data' => $this->collection,
         ];
     }
 }
