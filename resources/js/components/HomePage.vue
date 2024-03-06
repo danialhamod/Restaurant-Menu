@@ -1,16 +1,15 @@
 <template>
   <div>
-    <h3>Welcome to the Home Page</h3>
-    <example-component></example-component>
+    <categories-table></categories-table>
   </div>
 </template>
 
 <script>
-import ExampleComponent from './ExampleComponent.vue';
+import CategoriesTable from './CategoriesTable.vue';
 
 export default {
   components: {
-    ExampleComponent
+    CategoriesTable
   }
 }
 </script>

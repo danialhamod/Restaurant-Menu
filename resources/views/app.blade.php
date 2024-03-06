@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Application</title>
         @vite('resources/css/app.css')
+        @vite('resources/css/app.scss')
     </head>
     <body>
         <div id="app">
