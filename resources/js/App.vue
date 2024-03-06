@@ -17,13 +17,15 @@
       </v-list-item>
       
       <v-list>
-        <v-list-item v-for="(item, index) in [{icon: '', title: 'Categories'}, {icon: '', title: 'Items'}]" :key="index" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+        <v-list-item v-for="(item, index) in [{icon: '', title: 'Categories', link: '/'}, {icon: '', title: 'Items',  link: '/items'}]" :key="index" link>
+          <router-link :to="item.link">
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </router-link>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -80,5 +82,10 @@ header {
 
 .v-spacer {
   height: 20px;
+}
+
+a {
+  text-decoration: none;
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
 }
 </style>

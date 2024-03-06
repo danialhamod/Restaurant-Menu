@@ -91,7 +91,7 @@ export default {
     headers: [
       { title: 'Name', align: 'start', sortable: false, key: 'name' },
       { title: 'Parent', align: 'start', sortable: false, key: 'parent_name' },
-      { title: 'Discount', key: 'Discount', align: 'end', sortable: false },
+      { title: 'Discount', key: 'discount', align: 'end', sortable: false },
       { title: 'Created at', key: 'created_at', align: 'end', sortable: false },
       { title: 'Actions', key: 'actions', align: 'center', sortable: false },
     ],

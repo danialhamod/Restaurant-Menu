@@ -24,6 +24,7 @@ class ItemResource extends JsonResource
             'discount' => $this->discount,
             'discounted_price' => $this->calculateDiscountedPrice($this->price),
             'category_id' => $this->category_id,
+            'category_name' => $this->category->name,
             'created_at' => Carbon::parse($this->created_at)->format('M d Y'),
         ];
     }

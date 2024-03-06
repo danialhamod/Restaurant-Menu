@@ -2,8 +2,8 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import {createApp} from 'vue'
 import App from './App.vue'
-import HomePage from './components/HomePage.vue'
-import AboutPage from './components/AboutPage.vue'
+import CategoriesPage from './components/CategoriesPage.vue'
+import ItemsPage from './components/ItemsPage.vue'
 import { VAlert, VApp, VBtn, VCard, VCardActions, VCardText, VCardTitle, VDataTableServer, VDialog, VIcon, VSelect } from 'vuetify/components';
 import vuetify from "./vuetify";
 
@@ -11,8 +11,8 @@ import vuetify from "./vuetify";
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/', component: HomePage },
-  { path: '/about', component: AboutPage },
+  { path: '/', component: CategoriesPage },
+  { path: '/items', component: ItemsPage },
 ]
 
 // 3. Create the router instance and pass the `routes` option
