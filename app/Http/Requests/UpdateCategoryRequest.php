@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\ChildTypes;
 use App\Rules\DontHaveMixedChilds;
 use App\Rules\MaxLevelSubCategory;
+use App\Rules\NotDescendantCategory;
 use App\Traits\WrapsApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,7 +28,9 @@ class UpdateCategoryRequest extends FormRequest
             'parent_id' => [
                 'exists:categories,id',
                 new MaxLevelSubCategory(config('app.subcategoryMaxLevel')),
-                new DontHaveMixedChilds(ChildTypes::Item)
+                new DontHaveMixedChilds(ChildTypes::Item),
+                'not_in:' . request()->id,
+                new NotDescendantCategory(request()->id)
             ],
         ];
     }

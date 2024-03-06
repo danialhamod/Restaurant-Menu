@@ -51,7 +51,15 @@ export default {
       message: '',
       color: 'error',
     }
-  })
+  }),
+  provide() {
+    return {
+      showToast: (error) => {
+        this.snackbar.message = `${error.response.data.error_description[0]}`;
+        this.snackbar.show = true;
+      },
+    };
+  },
 }
 </script>
 

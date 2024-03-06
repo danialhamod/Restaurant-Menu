@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,8 +21,7 @@ class CategoryResource extends JsonResource
             'discount' => $this->discount,
             'parent_id' => $this->parent_id,
             'parent_name' => $this->parent ? $this->parent->name : '',
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => Carbon::parse($this->created_at)->format('M d Y'),
         ];
     }
 }

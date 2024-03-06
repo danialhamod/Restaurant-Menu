@@ -3,7 +3,7 @@
       <v-card-title>
         Categories
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click="showCreateModal = true">Add New Category</v-btn>
+        <v-btn color="primary" @click="addItem()">Add New Category</v-btn>
       </v-card-title>
       <v-card-text>
         <v-data-table-server
@@ -84,6 +84,7 @@ import axios from 'axios';
 import { VDataTableServer } from 'vuetify/lib/components/index.mjs';
 
 export default {
+  inject: ['showToast'],
   data: () => ({
     itemsPerPage: 10,
     page: 1,
@@ -123,9 +124,12 @@ export default {
         })
         .catch(error => {
           this.loading = false;
-          // this.snackbar.message = `${error.response.data.error_description[0]}`;
-          // this.snackbar.show = true;
+          this.showToast(error);
         });
+    },
+    addItem() {
+      this.editableItem = { };
+      this.showCreateModal = true;
     },
     editItem(item) {
       this.editableItem = { ...item };
@@ -139,8 +143,7 @@ export default {
             this.getCategories(); // Refresh list after deletion
           })
           .catch(error => {
-            // this.snackbar.message = `${error.response.data.error_description[0]}`;
-            // this.snackbar.show = true;
+            this.showToast(error);
           })
           .finally(() => {
             this.loading = false;
@@ -155,8 +158,7 @@ export default {
           this.getCategories(); // Refresh list after saving
         })
         .catch(error => {
-          // this.snackbar.message = `${error.response.data.error_description[0]}`;
-          // this.snackbar.show = true;
+          this.showToast(error);
         })
         .finally(() => {
           this.loading = false;
@@ -170,8 +172,7 @@ export default {
           this.getCategories(); // Refresh list after update
         })
         .catch(error => {
-          // this.snackbar.message = `${error.response.data.error_description[0]}`;
-          // this.snackbar.show = true;
+          this.showToast(error);
         })
         .finally(() => {
           this.loading = false;

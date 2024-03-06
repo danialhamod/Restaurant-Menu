@@ -54,7 +54,6 @@ class Category extends Model
 
     public function getClosestDiscount()
     {
-        $count = 0;
         $currentCategory = $this;
 
         while ($currentCategory) {
@@ -67,4 +66,17 @@ class Category extends Model
         return 0;
     }
     
+    public function isDescendantOf($categoryId)
+    {
+        $parent = $this->parent;
+
+        while ($parent) {
+            if ($parent->id == $categoryId) {
+                return true;
+            }
+            $parent = $parent->parent;
+        }
+
+        return false;
+    }
 }

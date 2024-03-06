@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Enums\AppSettingsKeys;
 use App\Models\AppSettings;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,8 +24,7 @@ class ItemResource extends JsonResource
             'discount' => $this->discount,
             'discounted_price' => $this->calculateDiscountedPrice($this->price),
             'category_id' => $this->category_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => Carbon::parse($this->created_at)->format('M d Y'),
         ];
     }
 
