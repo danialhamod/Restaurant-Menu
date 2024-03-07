@@ -48,4 +48,17 @@ class CategoryRepository implements CategoryRepositoryInterface
             $category->delete();
         return $category;
     }
+
+    public function potintialParents($id)
+    {
+        $categories = Category::where('id', '<>', $id)->get();
+
+        $potentialParents = [];
+        foreach ($categories as $category) {
+            if (!$category->isDescendantOf($id, $categories)) {
+                $potentialParents[] = $category;
+            }
+        }
+        return $potentialParents;
+    }
 }

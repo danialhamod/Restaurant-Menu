@@ -9,4 +9,5 @@ interface CategoryRepositoryInterface
     public function findById($id);
     public function update($id, array $attributes);
     public function delete($id);
+    public function potintialParents($id);
 }

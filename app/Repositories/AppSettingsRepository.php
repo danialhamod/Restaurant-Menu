@@ -10,4 +10,9 @@ class AppSettingsRepository implements AppSettingsRepositoryInterface
     {
         return AppSettings::where('key', $key)->update(['value' => $value]);
     }
+
+    public function get($key)
+    {
+        return AppSettings::where('key', $key)->first()->value;
+    }
 }

@@ -38,25 +38,21 @@ class ItemService
     public function get($id)
     {
         $item = $this->itemRepository->findById($id);
-        if (!$item) return $this->notFound();
+        if (!$item) return notFound();
         return $this->respondSuccess(new ItemResource($item));
     }
 
     public function update($request, $id)
     {
         $item = $this->itemRepository->update($id, $request->validated());
-        if (!$item) return $this->notFound();
+        if (!$item) return notFound();
         return $this->respondSuccess(new ItemResource($item->fresh()));
     }
 
     public function delete($id)
     {
         $item = $this->itemRepository->delete($id);
-        if (!$item) return $this->notFound();
+        if (!$item) return notFound();
         return $this->respondSuccess();
-    }
-
-    private function notFound() {
-        return $this->respondError('Item doesn\'t exist anymore', ApiCode::NotFound);
     }
 }

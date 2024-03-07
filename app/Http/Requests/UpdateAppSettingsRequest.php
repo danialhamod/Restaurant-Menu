@@ -19,7 +19,7 @@ class UpdateAppSettingsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'discount' => 'numeric|min:0',
+            'discount' => 'numeric|min:0|max:100',
         ];
     }
 

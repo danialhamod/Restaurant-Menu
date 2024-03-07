@@ -17,7 +17,7 @@
       </v-list-item>
       
       <v-list>
-        <v-list-item v-for="(item, index) in [{icon: '', title: 'Categories', link: '/'}, {icon: '', title: 'Items',  link: '/items'}]" :key="index" link>
+        <v-list-item v-for="(item, index) in menuItems" :key="index" link>
           <router-link :to="item.link">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -52,13 +52,19 @@ export default {
       show: false,
       message: '',
       color: 'error',
-    }
+    },
+    menuItems: [
+      {icon: '', title: 'Categories', link: '/'},
+      {icon: '', title: 'Items',  link: '/items'},
+      {icon: '', title: 'Discount', link: '/discount'},
+    ]
   }),
   provide() {
     return {
-      showToast: (error) => {
-        this.snackbar.message = `${error.response.data.error_description[0]}`;
+      showToast: (data, success = false) => {
+        this.snackbar.message = success ? data : `${data.response.data.error_description[0]}`;
         this.snackbar.show = true;
+        this.snackbar.color = success ? 'success' : 'error';
       },
     };
   },

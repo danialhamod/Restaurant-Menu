@@ -23,7 +23,7 @@ class CreateItemRequest extends FormRequest
         return [
             'name' => 'required|string',
             'price' => 'required|numeric|min:0',
-            'discount' => 'numeric|min:0',
+            'discount' => 'numeric|min:0|max:100',
             'category_id' => [
                 'required',
                 'exists:categories,id',

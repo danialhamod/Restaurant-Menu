@@ -22,4 +22,9 @@ class AppSettingsService
         $this->appSettingsRepository->update(AppSettingsKeys::GlobalDiscount, $request->post('discount'));
         return $this->respondSuccess();
     }
+
+    public function get($key)
+    {
+        return $this->respondSuccess($this->appSettingsRepository->get($key));
+    }
 }

@@ -36,12 +36,13 @@
               <v-text-field label="Name" v-model="editableItem.name"></v-text-field>
               <v-text-field label="Discount" v-model="editableItem.discount"></v-text-field>
               <v-select
-                :items="serverItems"
+                :items="potintialParentsForAdd"
                 item-title="name"
                 item-value="id"
                 v-model="editableItem.parent_id"
                 label="Select Parent Category"
               ></v-select>
+              <v-label class="msg">Leave the parent empty to add root categroy</v-label>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -61,7 +62,7 @@
               <v-text-field label="Name" v-model="editableItem.name"></v-text-field>
               <v-text-field label="Discount" v-model="editableItem.discount"></v-text-field>
               <v-select
-                :items="serverItems"
+                :items="potintialParents"
                 item-title="name"
                 item-value="id"
                 v-model="editableItem.parent_id"
@@ -85,6 +86,9 @@ import { VDataTableServer } from 'vuetify/lib/components/index.mjs';
 
 export default {
   inject: ['showToast'],
+  mounted() {
+    this.getAllCategories()
+  },
   data: () => ({
     itemsPerPage: 10,
     page: 1,
@@ -102,8 +106,28 @@ export default {
     showCreateModal: false,
     showEditModal: false,
     editableItem: {},
+    potintialParents: [],
+    potintialParentsForAdd: [],
   }),
   methods: {
+    getAllCategories() {
+      axios.get('api/categories?all=1')
+        .then(response => {
+          this.potintialParentsForAdd = response.data.content.data
+        })
+        .catch(error => {
+          this.showToast(error);
+        });
+    },
+    getPotintialParents(id) {
+      axios.get(`/api/categories/getPotintialParents/${id}`)
+        .then(response => {
+          this.potintialParents = response.data.content
+        })
+        .catch(error => {
+          this.showToast(error);
+        });
+    },
     getCategories(options) {
       this.loading = true;
       const page = options && options.page ? options.page : this.page;
@@ -132,6 +156,7 @@ export default {
       this.showCreateModal = true;
     },
     editItem(item) {
+      this.getPotintialParents(item.id)
       this.editableItem = { ...item };
       this.showEditModal = true;
     },
@@ -183,3 +208,7 @@ export default {
 </script>
 
 
+<style>
+.msg {
+  font-size: 13px!important;
+}</style>

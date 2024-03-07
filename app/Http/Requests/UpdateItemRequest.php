@@ -23,7 +23,7 @@ class UpdateItemRequest extends FormRequest
         return [
             'name' => 'string',
             'price' => 'numeric|min:0',
-            'discount' => 'numeric|min:0',
+            'discount' => 'numeric|min:0|max:100',
             'category_id' => [
                 'exists:categories,id',
                 new DontHaveMixedChilds(ChildTypes::SubCategory)

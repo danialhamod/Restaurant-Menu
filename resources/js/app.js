@@ -4,6 +4,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import CategoriesPage from './components/CategoriesPage.vue'
 import ItemsPage from './components/ItemsPage.vue'
+import GlobalDiscount from './components/GlobalDiscount.vue'
 import { VAlert, VApp, VBtn, VCard, VCardActions, VCardText, VCardTitle, VDataTableServer, VDialog, VIcon, VSelect } from 'vuetify/components';
 import vuetify from "./vuetify";
 
@@ -13,6 +14,7 @@ import vuetify from "./vuetify";
 const routes = [
   { path: '/', component: CategoriesPage },
   { path: '/items', component: ItemsPage },
+  { path: '/discount', component: GlobalDiscount },
 ]
 
 // 3. Create the router instance and pass the `routes` option

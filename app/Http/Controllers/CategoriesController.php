@@ -40,4 +40,9 @@ class CategoriesController extends Controller
     {
         return $this->categoryService->delete($id);
     }
+
+    public function potintialParents($id)
+    {
+        return $this->categoryService->potintialParents($id);
+    }
 }

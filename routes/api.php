@@ -51,4 +51,6 @@ Route::get('/user', function (Request $request) {
 
 addResourceRoutes('categories', CategoriesController::class);
 addResourceRoutes('items', ItemsController::class);
-Route::post('globalDiscount/update', [AppSettingsController::class, 'updateGlobalDiscount'])->name('appsettings.update');
+Route::post('globalDiscount/update', [AppSettingsController::class, 'updateGlobalDiscount'])->name('appsettings.updateGlobalDiscount');
+Route::get('globalDiscount', [AppSettingsController::class, 'getGlobalDiscount'])->name('appsettings.getGlobalDiscount');
+Route::get('categories/getPotintialParents/{id}', [CategoriesController::class, 'potintialParents'])->name('categories.getPotintialParents');

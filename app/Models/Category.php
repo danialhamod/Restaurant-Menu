@@ -67,7 +67,7 @@ class Category extends Model
         return 0;
     }
     
-    public function isDescendantOf($categoryId)
+    public function isDescendantOf($categoryId, $categroies)
     {
         $parent = $this->parent;
 
@@ -75,7 +75,7 @@ class Category extends Model
             if ($parent->id == $categoryId) {
                 return true;
             }
-            $parent = $parent->parent;
+            $parent = findCategoryById($categroies, $parent->parent_id);
         }
 
         return false;
