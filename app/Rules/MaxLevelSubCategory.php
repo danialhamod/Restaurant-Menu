@@ -30,7 +30,7 @@ class MaxLevelSubCategory implements Rule
             [$attribute => 'exists:categories,id']
         )->passes();
 
-        return $existsRuleResult && Category::find($parentId)->isUnderMaxLavel($this->maxLevel);
+        return $existsRuleResult && Category::with('parent')->find($parentId)->isUnderMaxLavel($this->maxLevel);
     }
 
     /**
