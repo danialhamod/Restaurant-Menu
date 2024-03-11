@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'discount' => $this->discount,
             'parent_id' => $this->parent_id,
-            'parent_name' => $this->parent ? $this->parent->name : '',
+            'parent_name' => $this->whenLoaded('parent')->name ?? null,
             'created_at' => Carbon::parse($this->created_at)->format('M d Y'),
         ];
     }

@@ -23,7 +23,7 @@ class NotDescendantCategory implements Rule
         )->passes();
 
         // Check if the selected parent category is not a child of the category being edited
-        return ! Category::find($parentId)->isDescendantOf($this->categoryId, Category::all());
+        return ! Category::with('parent')->find($parentId)->isDescendantOf($this->categoryId, Category::all());
     }
 
     public function message()

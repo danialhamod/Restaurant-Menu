@@ -10,7 +10,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function search($search, $pageSize, $all)
     {
-        $query = Category::query();
+        $query = Category::with('parent');
         
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -30,7 +30,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function findById($id)
     {
-        return Category::find($id);
+        return Category::with('parent')->find($id);
     }
 
     public function update($id, array $attributes)
@@ -51,7 +51,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function potintialParents($id)
     {
-        $categories = Category::where('id', '<>', $id)->get();
+        $categories = Category::with('parent')->where('id', '<>', $id)->get();
 
         $potentialParents = [];
         foreach ($categories as $category) {

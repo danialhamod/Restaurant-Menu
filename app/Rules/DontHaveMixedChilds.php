@@ -33,7 +33,7 @@ class DontHaveMixedChilds implements Rule
         if (!$existsRuleResult) {
             return false;
         }
-        $category = Category::find($parentId);
+        $category = Category::with(['items', 'subcategories'])->find($parentId);
         $childsCount = $this->relation === ChildTypes::Item ? $category->items()->count() : $category->subcategories()->count();
         return $childsCount === 0;
     }

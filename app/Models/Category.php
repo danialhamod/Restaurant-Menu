@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
-    protected $append = ['parent'];
-    
+        
     /**
      * The attributes that are mass assignable.
      *

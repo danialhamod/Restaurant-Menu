@@ -23,7 +23,7 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'discount' => 'numeric|min:0|max:100',
+            'discount' => 'numeric|min:0|max:100|nullable',
             'parent_id' => [
                 'exists:categories,id',
                 new MaxLevelSubCategory(config('app.subcategoryMaxLevel')),

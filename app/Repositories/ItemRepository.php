@@ -10,7 +10,7 @@ class ItemRepository implements ItemRepositoryInterface
 
     public function search($search, $pageSize, $all)
     {
-        $query = Item::query();
+        $query = Item::with('category');
         
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -30,7 +30,7 @@ class ItemRepository implements ItemRepositoryInterface
 
     public function findById($id)
     {
-        return Item::find($id);
+        return Item::with('category')->find($id);
     }
 
     public function update($id, array $attributes)
